@@ -1,0 +1,128 @@
+:host{
+
+
+
+.bundles-container {
+  display: flex;
+  justify-content: center; // Changed from space-around to center
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+  background-color: var(--bg-color); // Inherit background from global styles
+}
+
+.bundle-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  color: #000000; // Explicitly black text for the card content
+  flex: 1;
+  min-width: 280px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; // Added for smooth transitions
+
+&.bundle-price-monthly {
+    transform: translateY(-5px) scale(1.1);
+    background: rgb(252, 240, 195);
+}
+
+  &:hover {
+    cursor: pointer;
+    // transform: translateY(-5px) scale(1.02); // Slight lift and scale up
+    box-shadow: 2px 8px 20px var(--shadow-color); // Enhanced shadow for "shiny" effect
+    // background: rgb(255, 253, 245);
+  }
+
+  &:active {
+    // transform: translateY(-2px) scale(0.98); // Slight press down and scale down
+    box-shadow: 0 2px 6px var(--shadow-color); // Reduced shadow
+  }
+
+  h3 {
+    color: #000000;
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  p.description {
+    color: #000000;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    min-height: 2em; // Approx 3 lines
+  }
+
+  h4 {
+    color: #000000;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 0;
+    color: #000000; // Explicitly black text
+    font-size: 0.9rem;
+  }
+
+  li {
+    color: #000000; // Explicitly black text
+    margin-bottom: 6px;
+  }
+}
+
+.price-box {
+  font-weight: bold;
+  padding: 10px 15px;
+  margin: 15px 0;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 1.2rem;
+
+  &.price-free {
+    background-color: #cccccc; // Gray
+    color: #000000; // Black text
+  }
+
+  &.price-monthly {
+    background-color: #ffd700; // Golden
+    color: #333333; // Dark gray text for better contrast on gold
+    
+
+  }
+
+  &.price-yearly {
+    background-color: #28a745; // Green
+    color: #ffffff; // White text
+  }
+}
+
+// Media query for tablet and mobile devices
+@media (max-width: 768px) {
+  .bundles-container {
+    flex-direction: column;
+    align-items: center; // Center cards in the column
+  }
+
+  .bundle-card {
+    width: 90%; // Make cards take more width in a single column
+    max-width: 400px; // Optional: adjust max-width if needed for single column
+    min-width: unset; // Allow it to be flexible based on width %
+
+    &.bundle-price-monthly {
+      // Adjust transform if needed for column layout, or leave as is
+      // For example, remove vertical translate if stacking causes issues
+      // transform: scale(1.1); // Example: keep scale but remove translateY
+    }
+  }
+}
+}

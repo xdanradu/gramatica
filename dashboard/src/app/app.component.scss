@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  background-color: var(--bg-color); // Ensure host takes the main background
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Ensures the container takes at least the full viewport height
+}
+
+app-top-navigation {
+  flex-shrink: 0; // Prevents the header from shrinking
+  background-color: var(--eerie-black-1); // Ensure nav uses its theme variable
+  box-shadow: 0 1px 3px var(--shadow-color); // Add a subtle shadow to header
+}
+
+.main-content {
+  flex-grow: 1; // Allows the main content area to take up all available space
+  display: flex; // Optional: if you want the content of router-outlet to also be a flex container
+  flex-direction: column; // Optional: if you want the content of router-outlet to stack vertically
+}
+
+app-footer {
+  flex-shrink: 0; // Prevents the footer from shrinking
+  background-color: var(--eerie-black-1); // Ensure footer uses its theme variable
+}

@@ -1,0 +1,12 @@
+<footer>
+  <div class="footer-content">
+    <p>&copy; {{ currentYear }} {{ companyName }}. All rights reserved.</p>
+    <nav class="footer-nav">
+      <ul>
+        <li *ngFor="let link of footerLinks">
+          <a [routerLink]="link.path">{{ link.label }}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</footer>

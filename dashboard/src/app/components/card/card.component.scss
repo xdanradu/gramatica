@@ -1,0 +1,158 @@
+:host{
+  --primary-900: hsl(256, 43%, 7%);
+  --primary-800: hsl(240, 24%, 13%);
+  --primary-700: hsl(243, 26%, 15%);
+  --primary-600: hsl(252, 9%, 22%);
+  --primary-500: hsl(259, 13%, 28%);
+  --primary-400: hsl(254, 22%, 32%);
+
+  --primary-300: hsl(251, 13%, 68%);
+  --primary-200: hsl(240, 15%, 76%);
+  --primary-100: hsl(240, 21%, 88%);
+
+  --neutral-100: hsl(0, 0%, 100%);
+
+  --accent-400: hsl(93, 60%, 69%);
+
+  --text-1: var(--neutral-100);
+  --text-2: var(--primary-100);
+  --text-3: var(--primary-200);
+
+  --surface-1: var(--primary-900);
+  --surface-2: var(--primary-800);
+  --surface-3: var(--primary-700);
+
+  --border-1: var(--primary-500); /* top */
+  --border-2: var(--primary-600); /* bottom */
+
+
+
+
+  display: block;
+  color: var(--text-color); // Use global text color
+  line-height: 1.5;
+
+h1, h2, h3, h4, h5, h6 { // General heading styling within the card
+  color: var(--text-color);
+  margin-bottom: 0.5em; // Add some space below headings
+}
+
+h1 { // If h1 is used as card title
+  font-size: 1.25rem; // 20px
+  font-weight: 600;
+}
+
+h2 { // If h2 is used as card subtitle or section title
+  font-size: 1rem; // 16px
+  font-weight: 600;
+  color: var(--text-color-secondary);
+}
+
+.card {
+  background-color: var(--card-bg); // Use global card background
+  border-radius: 8px; // LinkedIn uses rounded corners
+  border: 1px solid var(--border-color); // Subtle border
+  // box-shadow: 0 1px 2px var(--shadow-color); // Optional: very subtle shadow instead of border
+  padding: 16px; // Standard padding
+  max-inline-size: 100%; // Allow card to take parent width
+  margin-inline: 0; // Remove auto margin if used in a flex/grid layout
+  display: grid; // Keep grid if internal layout needs it
+  gap: 16px; // Adjust gap as needed
+}
+
+// Remove the complex ::before pseudo-element styling
+// .card::before { ... } // This section is removed
+
+// Style specific elements within the card if they exist from the original HTML
+// For example, if .referral-code, .rewards etc. are still part of card.component.html
+// they would need to be restyled to fit the LinkedIn aesthetic or removed if not applicable.
+// Assuming the card.component.html is now simpler and uses generic elements or
+// elements styled by the inputs (title, descriptionLines).
+
+.card-content {
+  // Styles for the main content area of the card
+  ul {
+    list-style-position: inside;
+    padding-left: 0;
+    margin-top: 8px;
+    li {
+      margin-bottom: 4px;
+      color: var(--text-color-secondary);
+    }
+  }
+  p {
+    color: var(--text-color);
+    margin-bottom: 8px;
+  }
+  .price-info {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1rem;
+  }
+}
+
+.card-action {
+  margin-top: 16px; // Space above action buttons
+  .btn {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px; // LinkedIn often uses pill-shaped buttons
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--accent-color) 85%, black);
+    }
+
+    // Secondary button style (ghost or outline)
+    &.btn-secondary {
+        background-color: transparent;
+        color: var(--accent-color);
+        border: 1px solid var(--accent-color);
+
+        &:hover {
+            background-color: color-mix(in srgb, var(--accent-color) 10%, transparent);
+        }
+    }
+  }
+}
+
+// Remove or adapt other specific styles like .referral-code, .copy, .rewards
+// if they are not part of the generic card structure you want.
+// For this exercise, I'm assuming a simpler card structure.
+.referral-code, .copy, .referred-users, .rewards, .text-accent, .flex-between {
+  // These might need to be removed or significantly restyled
+  // For now, let's hide them if they are too specific to the old design
+  // display: none; 
+  // Or, provide basic LinkedIn-like styling if they are meant to be generic sections
+}
+
+.referral-code {
+  background-color: var(--eerie-black-2);
+  padding: 8px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.rewards {
+  background-color: var(--eerie-black-2);
+  padding: 12px;
+  border-radius: 4px;
+  text-align: center;
+  h2 {
+    color: var(--text-color);
+  }
+  p {
+    color: var(--text-color-secondary);
+  }
+  .text-accent { // Re-purpose text-accent for the new theme
+    color: var(--accent-color);
+    font-weight: 600;
+  }
+}}

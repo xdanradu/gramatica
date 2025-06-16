@@ -1,0 +1,15 @@
+<ng-container *ngIf="!authService.isLoggedIn(); else loggedInContent">
+  <!--<app-shared-image [imageUrl]="homepageBannerImage"></app-shared-image>-->
+  <div class="product-bundles-wrapper">
+    <app-product-bundles></app-product-bundles>
+  </div>
+</ng-container>
+
+<ng-template #loggedInContent>
+  <div class="welcome-container">
+    <h2>Welcome back!</h2>
+    <p>You are successfully logged in. You can now explore your dashboard or start a new wizzard session.</p>
+    <!-- You can add links or other content for logged-in users here -->
+  </div>
+</ng-template>
+

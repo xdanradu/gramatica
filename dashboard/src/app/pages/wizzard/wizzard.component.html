@@ -1,0 +1,87 @@
+<div class="wizzard-container">
+  <div class="progress-bar-container">
+    <div class="progress-bar" [style.width.%]="progressPercentage"></div>
+    <span class="progress-text">{{ currentStep + 1 }} / {{ questions.length }}</span>
+  </div>
+
+  <div *ngIf="!isWizzardComplete && isTimerFeatureEnabled" class="timer-container">
+    Time Left: {{ formatTimeLeft() }}
+  </div>
+
+  <div *ngIf="!isWizzardComplete" class="question-area">
+    <div *ngIf="currentQuestion" class="question-card">
+      <div class="question-header">
+        <h2>{{ currentQuestion.questionText }}</h2>
+        <button 
+          *ngIf="isStudyModeEnabled && currentQuestion.extendedDescription" 
+          (click)="toggleExtendedDescription()" 
+          class="study-mode-button"
+          title="Show/Hide Explanation">
+          {{ showExtendedDescription ? 'Hide Explanation' : 'Show Explanation' }}
+        </button>
+      </div>
+      <div class="answers-container">
+        <button
+          *ngFor="let answer of currentQuestion.answers"
+          class="answer-option"
+          [class.selected]="isAnswerSelected(answer.id)"
+          (click)="selectAnswer(answer.id)"
+          [disabled]="isWizzardComplete || (isTimerFeatureEnabled && isTimeUp)"
+        >
+          {{ answer.text }}
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="isStudyModeEnabled && showExtendedDescription && currentQuestion?.extendedDescription" class="extended-description-container">
+      <h3>Extended Explanation:</h3>
+      <p>{{ currentQuestion.extendedDescription }}</p>
+    </div>
+
+    <div class="navigation-buttons">
+      <button
+        (click)="previousStep()"
+        [disabled]="currentStep === 0 || isWizzardComplete || (isTimerFeatureEnabled && isTimeUp)"
+        class="nav-button prev-button"
+      >
+        Previous
+      </button>
+      <button
+        (click)="nextStep()"
+        [disabled]="currentQuestion?.userSelectedAnswerId === null || isWizzardComplete || (isTimerFeatureEnabled && isTimeUp)"
+        class="nav-button next-button"
+      >
+        {{ currentStep === questions.length - 1 ? 'Show Results' : 'Next' }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isWizzardComplete" class="results-area">
+    <h2>{{ (isTimerFeatureEnabled && isTimeUp) ? "Time's Up!" : "Wizzard Complete!" }}</h2>
+    <p *ngIf="isTimerFeatureEnabled && isTimeUp" class="time-up-message">
+      Time ran out! Here are your results for the answered questions.
+    </p>
+    <p class="score">Your Score: {{ score }} / {{ questions.length }}</p>
+    
+    <h3>Review Your Answers:</h3>
+    <ul class="results-summary">
+      <li *ngFor="let question of questions; let i = index">
+        <p><strong>Q{{ i + 1 }}: {{ question.questionText }}</strong></p>
+        <p>
+          Your answer: 
+          <span 
+            [ngClass]="getStyleClass(question)">
+            {{ getUserAnswerText(question) }}
+          </span>
+        </p>
+        <p *ngIf="shouldDisplay(question)">
+          Correct answer: {{ getCorrectAnswer(question) }}
+        </p>
+      </li>
+    </ul>
+    <div class="results-navigation-buttons" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+      <button (click)="resetWizzard()" class="nav-button reset-button">Try Again</button>
+      <button routerLink="/progress" class="nav-button analytics-button">View Progress</button>
+    </div>
+  </div>
+</div>

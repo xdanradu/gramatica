@@ -1,0 +1,53 @@
+<div class="progress-analytics-container">
+  <h2>Test Progress</h2>
+
+  <div *ngIf="latestResults.length > 0; else noResults">
+    <div class="chart-placeholder">
+      <h4>Score Trend (Last 10 Attempts)</h4>
+      <p>
+        <em>A graph visualizing score percentages over time would be displayed here.</em>
+      </p>
+      <!-- Example of how data might be shown if a chart library was used -->
+      <div class="simple-bar-chart-container" *ngIf="chartData.length > 0 && chartData[0].data.length > 0">
+        <p><strong>Scores (%):</strong></p>
+        <div class="bars">
+          <div *ngFor="let score of chartData[0].data; let i = index" class="bar-wrapper">
+            <div class="bar" 
+                 [style.height.%]="normalizedChartBarHeights[i]" 
+                 [title]="chartLabels[i] + ': ' + (score | number:'1.0-0') + '%'">
+            </div>
+            <span class="bar-label">{{ chartLabels[i] }}</span>
+          </div>
+          <!-- Average Line and Label -->
+          <ng-container *ngIf="averageScore !== null">
+            <div class="average-line"
+                 [style.bottom.%]="averageScore"
+                 [title]="'Average Score: ' + (averageScore | number:'1.0-2') + '%'">
+            </div>
+            <span class="average-line-text-label" 
+                  [style.bottom.%]="averageScore"
+                  [class.label-below-line]="averageScore > 90">
+              Avg: {{ averageScore | number:'1.0-0' }}%
+            </span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <h3>Last 10 Test Attempts</h3>
+    <ul class="results-list">
+      <li *ngFor="let result of latestResults" class="result-item">
+        <span>Date: {{ result.date | date:'medium' }}</span>
+        <span>Score: {{ result.score }} / {{ result.totalQuestions }}</span>
+        <span>Status: {{ result.timeUp ? 'Time Expired' : 'Completed' }}</span>
+        <span>Percentage: {{ (result.score / result.totalQuestions) * 100 | number:'1.0-2' }}%</span>
+      </li>
+    </ul>
+
+    <button (click)="clearAllResults()" class="clear-results-button">Clear All Results</button>
+  </div>
+
+  <ng-template #noResults>
+    <p>No test results found. Complete a wizzard to see your progress here.</p>
+  </ng-template>
+</div>

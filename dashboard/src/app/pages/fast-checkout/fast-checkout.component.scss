@@ -1,0 +1,128 @@
+:host {
+  display: block;
+  width: 100%; // Default width for smaller screens
+  max-width: 1200px; // Maximum width it can expand to
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+
+  // Apply min-width for desktop screens
+  @media (min-width: 992px) {
+    width: 700px;
+    // The component will be at least 900px wide on screens 992px and wider,
+    // centered due to margin: auto, and capped by max-width: 1200px.
+    // The initial width: 600px will be overridden by min-width: 900px on these larger screens.
+  }
+}
+
+.checkout-container {
+  h1 {
+    text-align: center;
+    color: var(--accent-color);
+    margin-bottom: 30px;
+  }
+
+  .selected-bundle-info {
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border-color);
+
+    h3 {
+      margin-top: 0;
+      color: var(--accent-color);
+    }
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.checkout-section {
+  background-color: var(--card-bg);
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border: 1px solid var(--border-color);
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+  }
+}
+
+.form-field {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-color) 30%, transparent);
+    }
+  }
+}
+
+.error-message {
+  color: var(--danger-color);
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+.btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: filter 0.2s ease, background-color 0.2s ease;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: var(--white);
+  &:hover:not(:disabled) {
+    filter: brightness(110%);
+  }
+}
+
+.btn-success {
+  background-color: var(--success-color);
+  color: var(--white);
+  &:hover:not(:disabled) {
+    filter: brightness(110%);
+  }
+}
+
+// Initially hide payment section if using CSS for animation (though *ngIf handles visibility)
+.payment-details-section {
+  // Styles for when it's visible
+}

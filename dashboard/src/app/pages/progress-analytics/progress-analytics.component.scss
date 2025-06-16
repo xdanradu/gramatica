@@ -1,0 +1,124 @@
+.progress-analytics-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+
+  h2, h3, h4 {
+    color: var(--text-color);
+  }
+
+  .results-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .result-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    span {
+      margin-right: 15px;
+      color: var(--text-color-secondary);
+    }
+     span:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .chart-placeholder {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--background-code);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-align: center;
+    color: var(--text-color-secondary);
+  }
+
+  .clear-results-button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darkred;
+    }
+  }
+
+  .simple-bar-chart-container {
+    margin-top: 20px;
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      height: 150px; /* Adjust as needed */
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 5px;
+      gap: 5px; /* Space between bars */
+      position: relative; /* Added for absolute positioning of average line */
+    }
+    .bar-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: 100%; /* Make wrapper take full height of .bars container */
+      justify-content: flex-end; /* Align bar and label to the bottom of this wrapper */
+    }
+    .bar {
+      // background-color: var(--primary-color);
+      background-color: rgb(145, 174, 255);
+      width: 80%; /* Width of the bar within its wrapper */
+      margin: 0 auto; /* Center bar in wrapper */
+      border-radius: 3px 3px 0 0;
+      transition: height 0.3s ease-out;
+    }
+    .bar-label {
+      font-size: 0.7em;
+      margin-top: 5px;
+      color: var(--text-color-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .average-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px; 
+      background-color: var(--accent-color, crimson); 
+      z-index: 1; 
+      pointer-events: none;
+    }
+
+    .average-line-text-label {
+      position: absolute;
+      right: 5px; 
+      transform: translateY(calc(-100% - 3px)); /* Default: position slightly above the line */
+      font-size: 0.7em;
+      color: var(--accent-color, crimson);
+      background-color: var(--card-bg); 
+      padding: 1px 4px;
+      border-radius: 3px;
+      border: 1px solid var(--accent-color, crimson);
+      z-index: 2;
+      white-space: nowrap;
+
+      &.label-below-line {
+        transform: translateY(5px); /* Position slightly below the line if average is high */
+      }
+    }
+  }
+}

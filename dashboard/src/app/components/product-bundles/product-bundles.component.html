@@ -1,0 +1,23 @@
+<div class="bundles-container">
+  <div 
+  (click)="selectBundle(bundle)"
+  class="bundle-card" *ngFor="let bundle of bundles" [ngClass]="{
+      'bundle-price-free': bundle.price === '0 RON',
+      'bundle-price-monthly': bundle.price === '100 RON',
+      'bundle-price-yearly': bundle.price === '1000 RON'
+    }">
+    <h3>{{ bundle.title }}</h3>
+    <p class="description" *ngFor="let line of bundle.description">{{ line }}</p>
+    <div class="price-box" [ngClass]="{
+      'price-free': bundle.price === '0 RON',
+      'price-monthly': bundle.price === '100 RON',
+      'price-yearly': bundle.price === '1000 RON'
+    }">
+      {{ bundle.price === '0 RON' ? 'Gratis' : bundle.price }}
+    </div>
+    <h4>Benefits:</h4>
+    <ul>
+      <li *ngFor="let benefit of bundle.benefits">{{ benefit }}</li>
+    </ul>
+  </div>
+</div>

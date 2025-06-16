@@ -1,0 +1,43 @@
+:host {
+    display: block;
+    background-color: var(--bg-color); // Footer background same as body or slightly different
+    color: var(--text-color-secondary); // Secondary text color for footer
+    padding: 20px 15px; // Adjusted padding
+    text-align: center;
+    font-size: 0.8rem; // Smaller font size
+    border-top: 1px solid var(--border-color); // Add a top border
+}
+
+.footer-content {
+    max-width: 1128px; // Align with header content width
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-nav a {
+    color: var(--text-color-secondary);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--accent-color);
+        text-decoration: underline;
+    }
+}

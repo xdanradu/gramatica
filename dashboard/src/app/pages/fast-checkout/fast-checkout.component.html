@@ -1,0 +1,103 @@
+<div class="checkout-container">
+  <h1>Fast Checkout</h1>
+
+  <div *ngIf="selectedBundle" class="selected-bundle-info">
+    <h3>Selected Plan: {{ selectedBundle.title }}</h3>
+    <p>Price: {{ selectedBundle.price === '0 RON' ? 'Gratis' : selectedBundle.price }}</p>
+  </div>
+
+  <section class="checkout-section user-details-section">
+    <h2>Step 1: Your Details</h2>
+    <form [formGroup]="userDetailsForm" (ngSubmit)="proceedToPayment()" novalidate>
+      <div class="form-field">
+        <label for="fullName">Full Name</label>
+        <input id="fullName" type="text" formControlName="fullName">
+        <div *ngIf="uf['fullName'].touched && uf['fullName'].errors?.['required']" class="error-message">
+          Full name is required.
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email Address</label>
+        <input id="email" type="email" formControlName="email">
+        <div *ngIf="uf['email'].touched && uf['email'].errors?.['required']" class="error-message">
+          Email is required.
+        </div>
+        <div *ngIf="uf['email'].touched && uf['email'].errors?.['email']" class="error-message">
+          Please enter a valid email.
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="address">Address</label>
+        <input id="address" type="text" formControlName="address">
+        <div *ngIf="uf['address'].touched && uf['address'].errors?.['required']" class="error-message">
+          Address is required.
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="city">City</label>
+        <input id="city" type="text" formControlName="city">
+        <div *ngIf="uf['city'].touched && uf['city'].errors?.['required']" class="error-message">
+          City is required.
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="zipCode">Zip Code</label>
+        <input id="zipCode" type="text" formControlName="zipCode">
+        <div *ngIf="uf['zipCode'].touched && uf['zipCode'].errors?.['required']" class="error-message">
+          Zip code is required.
+        </div>
+         <div *ngIf="uf['zipCode'].touched && uf['zipCode'].errors?.['pattern']" class="error-message">
+          Invalid zip code format.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="isPaymentSectionVisible && !isFreeBundle">
+        {{ isFreeBundle ? 'Complete Subscription' : 'Proceed to Payment' }}
+      </button>
+    </form>
+  </section>
+
+  <section id="payment-section" class="checkout-section payment-details-section" *ngIf="isPaymentSectionVisible && !isFreeBundle">
+    <h2>Step 2: Payment Details</h2>
+    <form [formGroup]="paymentDetailsForm" (ngSubmit)="completePurchase()" novalidate>
+      <div class="form-field">
+        <label for="cardNumber">Card Number</label>
+        <input id="cardNumber" type="text" formControlName="cardNumber" placeholder="XXXXXXXXXXXXXXXX">
+        <div *ngIf="pf['cardNumber'].touched && pf['cardNumber'].errors?.['required']" class="error-message">
+          Card number is required.
+        </div>
+        <div *ngIf="pf['cardNumber'].touched && pf['cardNumber'].errors?.['pattern']" class="error-message">
+          Invalid card number (must be 16 digits).
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="expiryDate">Expiry Date (MM/YY)</label>
+        <input id="expiryDate" type="text" formControlName="expiryDate" placeholder="MM/YY">
+        <div *ngIf="pf['expiryDate'].touched && pf['expiryDate'].errors?.['required']" class="error-message">
+          Expiry date is required.
+        </div>
+        <div *ngIf="pf['expiryDate'].touched && pf['expiryDate'].errors?.['pattern']" class="error-message">
+          Invalid expiry date format (MM/YY).
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="cvv">CVV</label>
+        <input id="cvv" type="text" formControlName="cvv" placeholder="XXX">
+        <div *ngIf="pf['cvv'].touched && pf['cvv'].errors?.['required']" class="error-message">
+          CVV is required.
+        </div>
+        <div *ngIf="pf['cvv'].touched && pf['cvv'].errors?.['pattern']" class="error-message">
+          Invalid CVV (3 or 4 digits).
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success">Complete Purchase</button>
+    </form>
+  </section>
+</div>

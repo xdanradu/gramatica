@@ -1,0 +1,7 @@
+<button (click)="toggleTheme()" class="theme-toggle">
+    @if(isDarkTheme$ | async) {
+            <span>🌙</span>
+        } @else {
+            <span>☀️</span>
+        }
+</button>

@@ -1,0 +1,21 @@
+:host {
+    display: block;
+    width: 100vw;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+
+    img {
+        width: 100vw;
+        height:300px;
+        object-fit:cover;
+        border:10px solid gray;
+    }
+
+    app-card {
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 16px;
+    }
+}
