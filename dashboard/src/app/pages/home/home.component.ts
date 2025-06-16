@@ -14,7 +14,6 @@ import { ProductBundlesComponent } from '../../components/product-bundles/produc
   styleUrl: './home.component.scss',
   imports: [
     CommonModule, // Add CommonModule for *ngIf
-    SharedImageComponent,
     ProductBundlesComponent // Add ProductBundlesComponent
   ]
 })
