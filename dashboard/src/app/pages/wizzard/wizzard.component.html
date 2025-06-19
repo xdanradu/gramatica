@@ -9,33 +9,44 @@
   </div>
 
   <div *ngIf="!isWizzardComplete" class="question-area">
-    <div *ngIf="currentQuestion" class="question-card">
-      <div class="question-header">
-        <h2>{{ currentQuestion.questionText }}</h2>
-        <button 
-          *ngIf="isStudyModeEnabled && currentQuestion.extendedDescription" 
-          (click)="toggleExtendedDescription()" 
-          class="study-mode-button"
-          title="Show/Hide Explanation">
-          {{ showExtendedDescription ? 'Hide Explanation' : 'Show Explanation' }}
-        </button>
+    <div class="accordion">
+      <div #accordionItem *ngFor="let question of questions; let i = index" 
+           class="accordion-item" 
+           [class.active]="i === currentStep">
+        <div class="accordion-header" (click)="setStep(i)">
+          <h2 class="question-title">
+            <span class="question-index">{{ i + 1 }}.</span> {{ question.questionText }}
+          </h2>
+          <span class="accordion-icon"></span>
+        </div>
+        <div class="accordion-content" [style.max-height]="expandedSteps[i] ? accordionItem.scrollHeight + 'px' : '0'">
+          <div class="question-card-content">
+            <div class="answers-container">
+              <button
+                *ngFor="let answer of question.answers"
+                class="answer-option"
+                [class.selected]="isAnswerSelected(answer.id, i)"
+                (click)="selectAnswer(answer.id, i)"
+                [disabled]="isWizzardComplete || (isTimerFeatureEnabled && isTimeUp)"
+              >
+                {{ answer.text }}
+              </button>
+            </div>
+            <div *ngIf="isStudyModeEnabled && question.extendedDescription" class="study-mode-controls">
+              <button 
+                (click)="toggleExtendedDescription(i)" 
+                class="study-mode-button"
+                title="Show/Hide Explanation">
+                {{ showExtendedDescription[i] ? 'Hide Explanation' : 'Show Explanation' }}
+              </button>
+            </div>
+            <div *ngIf="isStudyModeEnabled && showExtendedDescription[i] && question.extendedDescription" class="extended-description-container">
+              <h3>Extended Explanation:</h3>
+              <p>{{ question.extendedDescription }}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="answers-container">
-        <button
-          *ngFor="let answer of currentQuestion.answers"
-          class="answer-option"
-          [class.selected]="isAnswerSelected(answer.id)"
-          (click)="selectAnswer(answer.id)"
-          [disabled]="isWizzardComplete || (isTimerFeatureEnabled && isTimeUp)"
-        >
-          {{ answer.text }}
-        </button>
-      </div>
-    </div>
-
-    <div *ngIf="isStudyModeEnabled && showExtendedDescription && currentQuestion?.extendedDescription" class="extended-description-container">
-      <h3>Extended Explanation:</h3>
-      <p>{{ currentQuestion.extendedDescription }}</p>
     </div>
 
     <div class="navigation-buttons">
@@ -48,7 +59,7 @@
       </button>
       <button
         (click)="nextStep()"
-        [disabled]="currentQuestion?.userSelectedAnswerId === null || isWizzardComplete || (isTimerFeatureEnabled && isTimeUp)"
+        [disabled]="questions[currentStep].userSelectedAnswerId === null || isWizzardComplete || (isTimerFeatureEnabled && isTimeUp)"
         class="nav-button next-button"
       >
         {{ currentStep === questions.length - 1 ? 'Show Results' : 'Next' }}

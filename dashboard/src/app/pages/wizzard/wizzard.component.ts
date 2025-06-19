@@ -28,7 +28,8 @@ export class WizzardComponent implements OnInit, OnDestroy {
 
   isStudyModeEnabled: boolean = false;
   private studyModeSubscription!: Subscription;
-  showExtendedDescription: boolean = false;
+  showExtendedDescription: { [key: number]: boolean } = {};
+  public expandedSteps: { [key: number]: boolean } = {};
 
   constructor(
     private featureToggleService: FeatureToggleService,
@@ -54,9 +55,10 @@ export class WizzardComponent implements OnInit, OnDestroy {
     this.studyModeSubscription = this.featureToggleService.isStudyModeEnabled$.subscribe(isEnabled => {
       this.isStudyModeEnabled = isEnabled;
       if (!isEnabled) {
-        this.showExtendedDescription = false; // Hide description if study mode is turned off
+        this.showExtendedDescription = {}; // Hide description if study mode is turned off
       }
     });
+    this.expandedSteps[this.currentStep] = true;
   }
 
   ngOnDestroy(): void {
@@ -109,10 +111,6 @@ export class WizzardComponent implements OnInit, OnDestroy {
     return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   }
 
-  get currentQuestion(): Question {
-    return this.questions[this.currentStep];
-  }
-
   get progressPercentage(): number {
     if (this.isWizzardComplete) {
       return 100;
@@ -120,25 +118,23 @@ export class WizzardComponent implements OnInit, OnDestroy {
     return ((this.currentStep) / this.questions.length) * 100;
   }
 
-  selectAnswer(answerId: number): void {
+  selectAnswer(answerId: number, questionIndex: number): void {
     if (this.isWizzardComplete || (this.isTimerFeatureEnabled && this.isTimeUp)) {
       return;
     }
-    this.currentQuestion.userSelectedAnswerId = answerId;
-    // Optionally hide description when an answer is selected
-    // this.showExtendedDescription = false; 
+    this.questions[questionIndex].userSelectedAnswerId = answerId;
   }
 
   nextStep(): void {
     if (this.isWizzardComplete || (this.isTimerFeatureEnabled && this.isTimeUp)) {
       return;
     }
-    if (this.currentQuestion.userSelectedAnswerId === null) {
+    if (this.questions[this.currentStep].userSelectedAnswerId === null) {
       return; // Don't proceed if no answer is selected
     }
-    this.showExtendedDescription = false; // Hide description for the next question
     if (this.currentStep < this.questions.length - 1) {
       this.currentStep++;
+      this.expandedSteps[this.currentStep] = true;
     } else {
       this.completeWizzard(false); // Pass false for dueToTimeUp
     }
@@ -148,9 +144,9 @@ export class WizzardComponent implements OnInit, OnDestroy {
     if (this.isWizzardComplete || (this.isTimerFeatureEnabled && this.isTimeUp)) {
       return;
     }
-    this.showExtendedDescription = false; // Hide description for the previous question
     if (this.currentStep > 0) {
       this.currentStep--;
+      this.expandedSteps[this.currentStep] = true;
     }
   }
 
@@ -180,8 +176,9 @@ export class WizzardComponent implements OnInit, OnDestroy {
     });
   }
 
-  isAnswerSelected(answerId: number): boolean {
-    return this.currentQuestion.userSelectedAnswerId === answerId;
+  isAnswerSelected(answerId: number, questionIndex: number): boolean {
+    const question = this.questions[questionIndex];
+    return !!question && question.userSelectedAnswerId === answerId;
   }
 
   getUserAnswerText(question: Question): string {
@@ -198,7 +195,7 @@ export class WizzardComponent implements OnInit, OnDestroy {
     this.isWizzardComplete = false;
     this.score = 0;
     this.isTimeUp = false; 
-    this.showExtendedDescription = false; // Reset description visibility
+    this.showExtendedDescription = {}; // Reset description visibility
     // Timer will be restarted via subscription to isTimerEnabled$ in ngOnInit or if already subscribed
     // For direct reset, ensure timer logic is re-evaluated:
     this.isTimerFeatureEnabled = this.featureToggleService.getIsTimerEnabled(); // Re-fetch current setting
@@ -225,9 +222,20 @@ getCorrectAnswer(question: Question): string | undefined {
     return question.answers.find(a => a.isCorrect)?.text
   }
 
-  toggleExtendedDescription(): void {
+  toggleExtendedDescription(questionIndex: number): void {
     if (this.isStudyModeEnabled) {
-      this.showExtendedDescription = !this.showExtendedDescription;
+      this.showExtendedDescription[questionIndex] = !this.showExtendedDescription[questionIndex];
     }
+  }
+
+  setStep(index: number): void {
+    if (!this.isWizzardComplete) {
+      this.currentStep = index;
+      this.toggleStep(index);
+    }
+  }
+
+  toggleStep(index: number): void {
+    this.expandedSteps[index] = !this.expandedSteps[index];
   }
 }
