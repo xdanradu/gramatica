@@ -73,14 +73,14 @@
       Time ran out! Here are your results for the answered questions.
     </p>
     <p class="score">Your Score: {{ score }} / {{ questions.length }}</p>
-    
+
     <h3>Review Your Answers:</h3>
     <ul class="results-summary">
       <li *ngFor="let question of questions; let i = index">
         <p><strong>Q{{ i + 1 }}: {{ question.questionText }}</strong></p>
         <p>
-          Your answer: 
-          <span 
+          Your answer:
+          <span
             [ngClass]="getStyleClass(question)">
             {{ getUserAnswerText(question) }}
           </span>
