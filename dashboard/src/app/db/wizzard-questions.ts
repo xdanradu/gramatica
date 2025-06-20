@@ -15,15 +15,15 @@ export interface Question {
 export const wizzardQuestions: Question[] = [
   {
     id: 1,
-    questionText: 'What is the capital of France?',
+    questionText: 'În seria: *Profesoara mă învaţă* [GN *algebra*].; *L-au uns* [GN *patriarh*].; *S-a supărat* [GPrep *pe* [GN *Ion*].; [GPrep *Pe* [GN *Ion*] *îl apreciază*., există în ordine:',
     answers: [
-      { id: 1, text: 'Berlin', isCorrect: false },
-      { id: 2, text: 'Madrid', isCorrect: false },
-      { id: 3, text: 'Paris', isCorrect: true },
-      { id: 4, text: 'Rome', isCorrect: false },
+      { id: 1, text: 'CD, CSec, CPO, CI', isCorrect: false },
+      { id: 2, text: 'CSec, CPO, CPrep, CD', isCorrect: true },
+      { id: 3, text: 'CSec, CPO, CD, CD', isCorrect: false },
+      { id: 4, text: 'CPO, Csec, CPrep, CD', isCorrect: false },
     ],
     userSelectedAnswerId: null,
-    extendedDescription: 'Paris is the capital and most populous city of France. It is known for its art, fashion, gastronomy and culture. Major landmarks include the Eiffel Tower, the Louvre Museum, and Notre-Dame Cathedral.',
+    extendedDescription: '*b.* (În propoziţia 1: *Profesoara* [GNpron *mă învaţă* [GN *algebra*]CSec., există complementul secundar [*algebra*], coocurent cu complementul direct [*mă*], solicitat de verbul tranzitiv cu dublu obiect [*învaţă*]. În propoziţia a 2-a: [GNpron *L*]CD*-au uns* [GN *patriarh*]CPO., verbul atributiv [*au uns*] solicită complementul predicativ al obiectului [*patriarh*], raportat la complementul direct [*l*-]. Verbul atributiv[*au uns*], complementul direct [*l*-] şi complementul predicativ al obiectului [*patriarh*] alcătuiesc o structură ternară. În propoziţia a 3-a: *S-a supărat* [GPrep *pe* [GN *Ion*]]., verbul intranzitiv [*s-a supărat*] îi impune nominalului substantiv [*pe Ion*] regimul prepoziţional şi îi atribuie rolul de *PACIENT*, îndeplinind funcţia de complement prepoziţional. În propoziţia a 4-a: [GPrep *Pe* [GN *Ion*]CD [GNpron *îl*]CDdublat  *apreciază*., grupul prepoziţional, cu nominalul inclus [*pe Ion*], are funcţia sintactică de complement direct, impusă de regimul semantico sintactic al verbului tranzitiv [*apreciază*].);',
   },
   {
     id: 2,

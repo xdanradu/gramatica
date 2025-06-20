@@ -251,13 +251,14 @@
 
 .accordion-item {
   background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   border-radius: 6px;
   transition: all 0.3s ease-in-out;
 
   &.active {
     border-color: var(--accent-color);
-    box-shadow: 0 0 10px color-mix(in srgb, var(--accent-color) 20%, transparent);
+    border-radius: 6px;
+    // box-shadow: 0 0 10px color-mix(in srgb, var(--accent-color) 20%, transparent);
   }
 }
 
@@ -267,12 +268,12 @@
   justify-content: space-between;
   align-items: center;
   cursor: default;
-  background-color: var(--bg-color);
+  // background-color: var(--bg-color);
 
   &.clickable {
     cursor: pointer;
     &:hover {
-      background-color: var(--eerie-black-2);
+      // background-color: var(--eerie-black-2);
     }
   }
 
@@ -291,7 +292,7 @@
 }
 
 .accordion-content {
-  max-height: 0;
+  // max-height: 0;
   overflow: hidden;
   // transition: max-height 0.4s ease-in-out;
   background-color: var(--card-bg);
