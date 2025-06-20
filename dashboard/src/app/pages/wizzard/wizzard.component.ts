@@ -126,7 +126,7 @@ export class WizzardComponent implements OnInit, OnDestroy {
     }
     this.currentQuestion.userSelectedAnswerId = answerId;
     // Optionally hide description when an answer is selected
-    // this.showExtendedDescription = false; 
+    // this.showExtendedDescription = false;
   }
 
   nextStep(): void {
@@ -197,7 +197,7 @@ export class WizzardComponent implements OnInit, OnDestroy {
     this.currentStep = 0;
     this.isWizzardComplete = false;
     this.score = 0;
-    this.isTimeUp = false; 
+    this.isTimeUp = false;
     this.showExtendedDescription = false; // Reset description visibility
     // Timer will be restarted via subscription to isTimerEnabled$ in ngOnInit or if already subscribed
     // For direct reset, ensure timer logic is re-evaluated:
@@ -211,7 +211,7 @@ export class WizzardComponent implements OnInit, OnDestroy {
 
   getStyleClass(question: Question): any {
     return {
-              'correct-answer': question.answers.find(a => a.id === question.userSelectedAnswerId)?.isCorrect, 
+              'correct-answer': question.answers.find(a => a.id === question.userSelectedAnswerId)?.isCorrect,
               'incorrect-answer': !question.answers.find(a => a.id === question.userSelectedAnswerId)?.isCorrect && question.userSelectedAnswerId !== null,
               'no-answer': question.userSelectedAnswerId === null
             }

@@ -242,3 +242,69 @@
 .reset-button, .analytics-button {
   margin-top: 20px;
 }
+
+// Accordion Styles
+.accordion {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accordion-item {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+
+  &.active {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px color-mix(in srgb, var(--accent-color) 20%, transparent);
+  }
+}
+
+.accordion-header {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+  background-color: var(--bg-color);
+
+  &.clickable {
+    cursor: pointer;
+    &:hover {
+      background-color: var(--eerie-black-2);
+    }
+  }
+
+  .question-title {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .question-index {
+    margin-right: 10px;
+    color: var(--accent-color);
+    font-weight: bold;
+  }
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  // transition: max-height 0.4s ease-in-out;
+  background-color: var(--card-bg);
+
+  .question-card-content {
+    padding: 0 20px 20px 20px;
+  }
+}
+
+.study-mode-controls {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
