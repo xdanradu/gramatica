@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule  } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 import { map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-theme-switcher',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, CommonModule ],
   templateUrl: './theme-switcher.component.html',
   styleUrls: ['./theme-switcher.component.scss']
 })

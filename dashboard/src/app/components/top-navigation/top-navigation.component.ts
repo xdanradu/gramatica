@@ -1,13 +1,14 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-// ThemeSwitcherComponent import removed
+import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.component';
+
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-top-navigation',
   standalone: true,
-  imports: [CommonModule, RouterModule], // ThemeSwitcherComponent removed from imports
+  imports: [CommonModule, RouterModule, ThemeSwitcherComponent],
   templateUrl: './top-navigation.component.html',
   styleUrls: ['./top-navigation.component.scss']
 })

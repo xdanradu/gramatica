@@ -9,7 +9,7 @@
 }
 
 .wizzard-container {
-  background-color: var(--card-bg);
+  background-color: #f5f5f5;
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 4px 12px var(--shadow-color);
@@ -21,9 +21,10 @@
 }
 
 .progress-bar-container {
-  width: 100%;
-  background-color: var(--eerie-black-2);
+  border: 2px solid var(--border-color);
   border-radius: 4px;
+  width: 100%;
+  background-color: var(--eerie-black-3);
   height: 25px; // Increased height
   position: relative;
   overflow: hidden; // Ensures progress bar stays within bounds
@@ -41,7 +42,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--white); // Ensure text is visible on accent color
+  color: var(--black); // Ensure text is visible on accent color
   font-size: 0.8rem;
   font-weight: bold;
   mix-blend-mode: difference; // Helps with visibility against changing background
@@ -59,7 +60,7 @@
   border: 1px solid var(--border-color);
   border-radius: 6px;
   background-color: var(--bg-color); // Slightly different background for card
-  
+
   .question-header {
     display: flex;
     justify-content: space-between;
@@ -163,7 +164,8 @@
   transition: filter 0.2s ease, background-color 0.2s ease;
 
   &.prev-button {
-    background-color: var(--secondary-color);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
     color: var(--white);
   }
 
@@ -171,7 +173,7 @@
     background-color: var(--accent-color);
     color: #ffffff; // Explicitly white for better contrast
   }
-  
+
   &:hover:not(:disabled) {
     filter: brightness(90%);
   }
@@ -186,7 +188,7 @@
 
 .results-area {
   text-align: center;
-  
+
   h2 {
     color: var(--success-color);
     font-size: 1.8rem;

@@ -97,19 +97,19 @@
       position: absolute;
       left: 0;
       right: 0;
-      height: 2px; 
-      background-color: var(--accent-color, crimson); 
-      z-index: 1; 
+      height: 2px;
+      background-color: var(--accent-color, crimson);
+      z-index: 1;
       pointer-events: none;
     }
 
     .average-line-text-label {
       position: absolute;
-      right: 5px; 
+      right: 5px;
       transform: translateY(calc(-100% - 3px)); /* Default: position slightly above the line */
       font-size: 0.7em;
       color: var(--accent-color, crimson);
-      background-color: var(--card-bg); 
+      background-color: var(--card-bg);
       padding: 1px 4px;
       border-radius: 3px;
       border: 1px solid var(--accent-color, crimson);

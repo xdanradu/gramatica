@@ -1,30 +1,35 @@
 <nav>
-    <ul>
-      <li><a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+  <ul>
+    <li><a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+
+    @if (isLoggedIn()) {
+      <li><a routerLink="/wizzard" routerLinkActive="active-link">Teste</a></li>
+    }
+
+    <li class="spacer"></li>
+
+    <li>
+      <!-- 🌙 Theme toggle inserted here -->
+      <app-theme-switcher></app-theme-switcher>
+    </li>
+
+    <li class="user-actions">
       @if (isLoggedIn()) {
-        <li><a routerLink="/wizzard" routerLinkActive="active-link">Teste</a></li>
+        <div class="user-menu">
+          <button (click)="toggleLogoutDropdown()" class="user-button" aria-label="User menu" [attr.aria-expanded]="showLogoutDropdown()">
+            👤<span class="checkmark">✔</span>
+          </button>
+          @if (showLogoutDropdown()) {
+            <div class="logout-dropdown">
+              <button class="logout-button" routerLink="/settings" (click)="showLogoutDropdown.set(false)">Settings</button>
+              <button class="logout-button" routerLink="/progress" (click)="showLogoutDropdown.set(false)">Progress</button>
+              <button (click)="performLogout()" class="logout-button">Logout</button>
+            </div>
+          }
+        </div>
+      } @else {
+        <a routerLink="/login" routerLinkActive="active-link" class="login-link" title="Login">👤</a>
       }
-      <!--<li><a routerLink="/contact" routerLinkActive="active-link">Contact</a></li>-->
-      <li class="spacer"></li>
-      <li class="user-actions">
-        @if (isLoggedIn()) {
-          <div class="user-menu">
-            <button (click)="toggleLogoutDropdown()" class="user-button" aria-label="User menu" [attr.aria-expanded]="showLogoutDropdown()">
-              👤<span class="checkmark">✔</span>
-            </button>
-            @if (showLogoutDropdown()) {
-              <div class="logout-dropdown">
-                <button class="logout-button" routerLink="/settings" routerLinkActive="active-link" (click)="showLogoutDropdown.set(false)">Settings</button>
-                <button class="logout-button" routerLink="/progress" routerLinkActive="active-link" (click)="showLogoutDropdown.set(false)">Progress</button>
-                <button (click)="performLogout()" class="logout-button">Logout</button>
-              </div>
-            }
-          </div>
-        } @else {
-          <a routerLink="/login" routerLinkActive="active-link" class="login-link" title="Login">
-            👤
-          </a>
-        }
-      </li>
-    </ul>
+    </li>
+  </ul>
 </nav>

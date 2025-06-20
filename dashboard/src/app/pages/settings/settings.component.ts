@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FeatureToggleService } from '../../services/feature-toggle.service';
 import { FormsModule } from '@angular/forms';
-import { ThemeSwitcherComponent } from '../../components/theme-switcher/theme-switcher.component';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [CommonModule, FormsModule, ThemeSwitcherComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss']
 })
