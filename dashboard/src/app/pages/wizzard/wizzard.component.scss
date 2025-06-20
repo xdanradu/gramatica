@@ -77,14 +77,14 @@
 }
 
 .study-mode-button {
-  background-color: var(--secondary-color);
-  color: var(--white);
+  width: 100%;
+  color: var(--text-color);
+  background-color: var(--bg-color);
   border: none;
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.8rem;
-  margin-left: 15px; // Space between question text and button
   white-space: nowrap; // Prevent button text from wrapping
 
   &:hover {

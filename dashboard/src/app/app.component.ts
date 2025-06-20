@@ -4,7 +4,6 @@ import { ThemeService } from './services/theme.service';
 import { CommonModule } from '@angular/common';
 import { TopNavigationComponent } from './components/top-navigation/top-navigation.component';
 import { FooterComponent } from './components/footer/footer.component';
-
 @Component({
   selector: 'app-root',
   standalone: true,

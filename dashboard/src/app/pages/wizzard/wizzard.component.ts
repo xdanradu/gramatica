@@ -6,10 +6,11 @@ import { FeatureToggleService } from '../../services/feature-toggle.service';
 import { Subscription } from 'rxjs';
 import { ProgressService } from '../../services/progress.service'; // Import ProgressService
 import { RouterModule } from '@angular/router';
+import { HighlightDirective } from '../../services/highlight.directive';
 
 @Component({
   selector: 'app-wizzard',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, HighlightDirective],
   standalone: true,
   templateUrl: './wizzard.component.html',
   styleUrl: './wizzard.component.scss'
@@ -186,7 +187,7 @@ export class WizzardComponent implements OnInit, OnDestroy {
       return 'Not answered';
     }
     const selectedAnswer = question.answers.find(a => a.id === question.userSelectedAnswerId);
-    return selectedAnswer ? selectedAnswer.text : 'Not answered';
+    return selectedAnswer ? selectedAnswer.prefix+') '+selectedAnswer.text : 'Not answered';
   }
 
   resetWizzard(): void {
@@ -218,8 +219,8 @@ export class WizzardComponent implements OnInit, OnDestroy {
 return !(question.answers.find(a => a.id === question.userSelectedAnswerId)?.isCorrect) && question.userSelectedAnswerId !== null
 }
 
-getCorrectAnswer(question: Question): string | undefined {
-    return question.answers.find(a => a.isCorrect)?.text
+getCorrectAnswer(question: Question): string {
+    return (question.answers.find(a => a.isCorrect)?.prefix +') '+ question.answers.find(a => a.isCorrect)?.text) || ''
   }
 
   toggleExtendedDescription(questionIndex: number): void {

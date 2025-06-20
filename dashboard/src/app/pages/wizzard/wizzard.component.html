@@ -14,9 +14,9 @@
            class="accordion-item" 
            [class.active]="i === currentStep">
         <div class="accordion-header" (click)="setStep(i)">
-          <h2 class="question-title">
-            <span class="question-index">{{ i + 1 }}.</span> {{ question.questionText }}
-          </h2>
+          <p class="question-title">
+            <span class="question-index">{{ i + 1 }}.</span> <span [appHighlight]="question.questionText"></span>
+          </p>
           <span class="accordion-icon"></span>
         </div>
           @if(expandedSteps[i]){
@@ -30,7 +30,7 @@
                 (click)="selectAnswer(answer.id, i)"
                 [disabled]="isWizzardComplete || (isTimerFeatureEnabled && isTimeUp)"
               >
-                {{ answer.text }}
+                {{answer.prefix}}) {{ answer.text }}
               </button>
             </div>
             <div *ngIf="isStudyModeEnabled && question.extendedDescription" class="study-mode-controls">
@@ -43,7 +43,7 @@
             </div>
             <div *ngIf="isStudyModeEnabled && showExtendedDescription[i] && question.extendedDescription" class="extended-description-container">
               <h3>Răspuns şi argumentare</h3>
-              <p>{{ question.extendedDescription }}</p>
+              <span [appHighlight]="question.extendedDescription"></span>
             </div>
           </div>
           </div>
@@ -81,16 +81,16 @@
     <h3>Review Your Answers:</h3>
     <ul class="results-summary">
       <li *ngFor="let question of questions; let i = index">
-        <p><strong>Q{{ i + 1 }}: {{ question.questionText }}</strong></p>
+        <p><strong>Q{{ i + 1 }}: <span [appHighlight]="question.questionText"></span></strong></p>
         <p>
           Your answer:
           <span
-            [ngClass]="getStyleClass(question)">
-            {{ getUserAnswerText(question) }}
+            [ngClass]="getStyleClass(question)"
+            [appHighlight]="getUserAnswerText(question)">
           </span>
         </p>
         <p *ngIf="shouldDisplay(question)">
-          Correct answer: {{ getCorrectAnswer(question) }}
+          Correct answer: <span [appHighlight]="getCorrectAnswer(question)"></span>
         </p>
       </li>
     </ul>
